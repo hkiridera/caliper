@@ -90,7 +90,7 @@ class CaliperEngine {
         BenchValidator.validateObject(this.benchmarkConfig);
 
         logger.info('Starting benchmark flow');
-        let connector = await this.adapterFactory(-1);
+        let connector
 
         try {
 
@@ -107,6 +107,7 @@ class CaliperEngine {
             } else {
                 let initStartTime = Date.now();
                 try {
+                    connector = await this.adapterFactory(-1);
                     await connector.init();
                 } catch (err) {
                     let msg = `Error while performing "init" step: ${err}`;
